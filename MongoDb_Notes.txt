@@ -1,0 +1,362 @@
+Database--->Collection--->Documents
+1. Create Database and drop database
+>use mydb
+>show dbs
+>db.mycolection.insert({"name":"Max"})
+ db.mycolection.insert({"name":"Max"})
+>db.dropDatabase()
+{ "dropped" : "mydb", "ok" : 1 }
+
+# db is general database not database name
+
+2. Create Collection and drop collection
+
+>use mydb
+switched to db mydb
+>db.createCollection("myCollection")
+{ "ok" : 1 }
+
+> show collections
+myCollection
+> db.myCollection2.insert({"name":"Max"})
+WriteResult({ "nInserted" : 1 })
+> show collections
+myCollection
+myCollection2
+> db.myCollection.drop()
+true
+
+3. Insert Documents
+
+>use school
+switched to db school
+>db.students.insert(
+	{
+		"studentNo": "1",
+		"FirstName": "Mark",
+		"LastName": "Waugh",
+		"Age": "10"
+	},
+	{
+		"studentNo": "2",
+		"FirstName": "Mel",
+		"LastName": "Gibson",
+		"Age": "17"
+	},
+	{
+		"studentNo": "3",
+		"FirstName": "Deno",
+		"LastName": "Socratus",
+		"Age": "40"
+	},
+	{
+		"studentNo": "4",
+		"FirstName": "Charls",
+		"LastName": "trippy",
+		"Age": "12"
+	}) 
+	
+	WriteResult({ "nInserted" : 1 })
+> db.students.insert(
+	[
+		{
+			"studentNo": "5",
+			"FirstName": "Hell",
+			"LastName": "Sir",
+			"Age": "10"
+		},
+		{
+			"studentNo": "6",
+			"FirstName": "Hi",
+			"LastName": "Waqt",
+			"Age": "17"
+		},
+		{
+			"studentNo": "7",
+			"FirstName": "Nam",
+			"LastName": "Kar",
+			"Age": "40"
+		},
+		{
+			"studentNo": "8",
+			"FirstName": "Hey",
+			"LastName": "Bad",
+			"Age": "12"
+		}
+	]	
+)
+4. Query Document
+
+> db.students.find()
+{ "_id" : ObjectId("5f9edae406b8e39f0a9a8861"), "studentNo" : "1", "FirstName" : "Mark", "LastName" : "Waugh", "Age" : "10" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8862"), "studentNo" : "5", "FirstName" : "Hell", "LastName" : "Sir", "Age" : "10" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8863"), "studentNo" : "6", "FirstName" : "Hi", "LastName" : "Waqt", "Age" : "17" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8864"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "40" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8865"), "studentNo" : "8", "FirstName" : "Hey", "LastName" : "Bad", "Age" : "12" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8866"), "studentNo" : "5", "FirstName" : "Hell", "LastName" : "Sir", "Age" : "10" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8867"), "studentNo" : "6", "FirstName" : "Hi", "LastName" : "Waqt", "Age" : "17" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8868"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "40" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8869"), "studentNo" : "8", "FirstName" : "Hey", "LastName" : "Bad", "Age" : "12" }
+
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5f9edae406b8e39f0a9a8861"),
+        "studentNo" : "1",
+        "FirstName" : "Mark",
+        "LastName" : "Waugh",
+        "Age" : "10"
+}
+{
+        "_id" : ObjectId("5f9edf9306b8e39f0a9a8862"),
+        "studentNo" : "5",
+        "FirstName" : "Hell",
+        "LastName" : "Sir",
+        "Age" : "10"
+}
+{
+        "_id" : ObjectId("5f9edf9306b8e39f0a9a8863"),
+        "studentNo" : "6",
+        "FirstName" : "Hi",
+        "LastName" : "Waqt",
+        "Age" : "17"
+}
+{
+        "_id" : ObjectId("5f9edf9306b8e39f0a9a8864"),
+        "studentNo" : "7",
+        "FirstName" : "Nam",
+        "LastName" : "Kar",
+        "Age" : "40"
+}
+{
+        "_id" : ObjectId("5f9edf9306b8e39f0a9a8865"),
+        "studentNo" : "8",
+        "FirstName" : "Hey",
+        "LastName" : "Bad",
+        "Age" : "12"
+}
+{
+        "_id" : ObjectId("5f9edfaa06b8e39f0a9a8866"),
+        "studentNo" : "5",
+        "FirstName" : "Hell",
+        "LastName" : "Sir",
+        "Age" : "10"
+}
+{
+        "_id" : ObjectId("5f9edfaa06b8e39f0a9a8867"),
+        "studentNo" : "6",
+        "FirstName" : "Hi",
+        "LastName" : "Waqt",
+        "Age" : "17"
+}
+{
+        "_id" : ObjectId("5f9edfaa06b8e39f0a9a8868"),
+        "studentNo" : "7",
+        "FirstName" : "Nam",
+        "LastName" : "Kar",
+        "Age" : "40"
+}
+{
+        "_id" : ObjectId("5f9edfaa06b8e39f0a9a8869"),
+        "studentNo" : "8",
+        "FirstName" : "Hey",
+        "LastName" : "Bad",
+        "Age" : "12"
+}
+> db.students.findOne()
+{
+        "_id" : ObjectId("5f9edae406b8e39f0a9a8861"),
+        "studentNo" : "1",
+        "FirstName" : "Mark",
+        "LastName" : "Waugh",
+        "Age" : "10"
+}
+
+
+> db.students.find( {"studentNo": "1"} )
+{ "_id" : ObjectId("5f9edae406b8e39f0a9a8861"), "studentNo" : "1", "FirstName" : "Mark", "LastName" : "Waugh", "Age" : "10" }
+
+> db.students.find({"Age": {$gt: "15"}})
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8863"), "studentNo" : "6", "FirstName" : "Hi", "LastName" : "Waqt", "Age" : "17" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8864"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "40" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8867"), "studentNo" : "6", "FirstName" : "Hi", "LastName" : "Waqt", "Age" : "17" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8868"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "40" }
+
+> db.students.find({"Age": {$gte: "15"}})
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8863"), "studentNo" : "6", "FirstName" : "Hi", "LastName" : "Waqt", "Age" : "17" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8864"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "40" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8867"), "studentNo" : "6", "FirstName" : "Hi", "LastName" : "Waqt", "Age" : "17" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8868"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "40" }
+
+> db.students.find({"Age": {$lte: "15"}})
+{ "_id" : ObjectId("5f9edae406b8e39f0a9a8861"), "studentNo" : "1", "FirstName" : "Mark", "LastName" : "Waugh", "Age" : "10" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8862"), "studentNo" : "5", "FirstName" : "Hell", "LastName" : "Sir", "Age" : "10" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8865"), "studentNo" : "8", "FirstName" : "Hey", "LastName" : "Bad", "Age" : "12" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8866"), "studentNo" : "5", "FirstName" : "Hell", "LastName" : "Sir", "Age" : "10" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8869"), "studentNo" : "8", "FirstName" : "Hey", "LastName" : "Bad", "Age" : "12" }
+
+> db.students.find({"Age": {$ne: "15"}})
+{ "_id" : ObjectId("5f9edae406b8e39f0a9a8861"), "studentNo" : "1", "FirstName" : "Mark", "LastName" : "Waugh", "Age" : "10" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8862"), "studentNo" : "5", "FirstName" : "Hell", "LastName" : "Sir", "Age" : "10" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8863"), "studentNo" : "6", "FirstName" : "Hi", "LastName" : "Waqt", "Age" : "17" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8864"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "40" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8865"), "studentNo" : "8", "FirstName" : "Hey", "LastName" : "Bad", "Age" : "12" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8866"), "studentNo" : "5", "FirstName" : "Hell", "LastName" : "Sir", "Age" : "10" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8867"), "studentNo" : "6", "FirstName" : "Hi", "LastName" : "Waqt", "Age" : "17" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8868"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "40" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8869"), "studentNo" : "8", "FirstName" : "Hey", "LastName" : "Bad", "Age" : "12" }
+
+5. Query Document-AND OR Conditions
+AND condition here
+> db.students.find( {"FirstName": "Mark", "Age": "10"} )
+{ "_id" : ObjectId("5f9edae406b8e39f0a9a8861"), "studentNo" : "1", "FirstName" : "Mark", "LastName" : "Waugh", "Age" : "10" }
+
+OR Conditions
+
+> db.students.find( {$or: [{"FirstName": "Mark"},{"Age": "40"}]} )
+{ "_id" : ObjectId("5f9edae406b8e39f0a9a8861"), "studentNo" : "1", "FirstName" : "Mark", "LastName" : "Waugh", "Age" : "10" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8864"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "40" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8868"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "40" }
+
+AND and OR both condition
+> db.students.find({"FirstName": "Mark", $or:[{"Age": "15"},{"Age": "10"}]})
+{ "_id" : ObjectId("5f9edae406b8e39f0a9a8861"), "studentNo" : "1", "FirstName" : "Mark", "LastName" : "Waugh", "Age" : "10" }
+
+6. MongoDb Update Document
+
+>  db.students.update({ "_id" : ObjectId("5f9edae406b8e39f0a9a8861")}, {$set : {"LastName": "Masen"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+Multiple Dcouments update
+> db.students.update({ "Age":"10"}, {$set : {"LastName": "Waugh"}},{multi:true})
+WriteResult({ "nMatched" : 3, "nUpserted" : 0, "nModified" : 3 })
+
+Below update with finding id if does not exist the given id then it create Doucments(Need to provide complete json)
+> db.students.save({ "_id" : ObjectId("5f9edf9306b8e39f0a9a8864"), "studentNo" : "7", "FirstName" : "Nam", "LastName" : "Kar", "Age" : "4" })
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+7. MongoDb Delete Document
+
+> db.students.remove({"_id" : ObjectId("5f9edfaa06b8e39f0a9a8869")})
+WriteResult({ "nRemoved" : 1 })
+
+> db.students.remove({"Age": "16"},1)
+WriteResult({ "nRemoved" : 0 }) 	
+
+8. MongoDB Projection
+
+projection means selecting only necessary data rather than whole of the data of a document
+
+>db.COLLECTION_NAME.find({},{KEY:1})
+
+> db.students.find({},{FirstName:1})
+{ "_id" : ObjectId("5f9edae406b8e39f0a9a8861"), "FirstName" : "Mark" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8862"), "FirstName" : "Hell" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8863"), "FirstName" : "Hi" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8864"), "FirstName" : "Nam" }
+{ "_id" : ObjectId("5f9edf9306b8e39f0a9a8865"), "FirstName" : "Hey" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8866"), "FirstName" : "Hell" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8867"), "FirstName" : "Hi" }
+{ "_id" : ObjectId("5f9edfaa06b8e39f0a9a8868"), "FirstName" : "Nam" }
+
+> db.students.find({},{FirstName:1,_id:0})
+{ "FirstName" : "Mark" }
+{ "FirstName" : "Hell" }
+{ "FirstName" : "Hi" }
+{ "FirstName" : "Nam" }
+{ "FirstName" : "Hey" }
+{ "FirstName" : "Hell" }
+{ "FirstName" : "Hi" }
+{ "FirstName" : "Nam" }
+
+9. Using sort, skip and Limit in MongoDb
+
+> db.students.find({},{FirstName: 1, _id: 0}).limit(4)
+{ "FirstName" : "Mark" }
+{ "FirstName" : "Hell" }
+{ "FirstName" : "Hi" }
+{ "FirstName" : "Nam" }
+
+> db.students.find({},{studentNo:1,FirstName: 1, _id: 0}).limit(4)
+{ "studentNo" : "1", "FirstName" : "Mark" }
+{ "studentNo" : "5", "FirstName" : "Hell" }
+{ "studentNo" : "6", "FirstName" : "Hi" }
+{ "studentNo" : "7", "FirstName" : "Nam" }
+
+
+> db.students.find({},{studentNo:1,FirstName: 1, _id: 0}).skip(2)
+{ "studentNo" : "6", "FirstName" : "Hi" }
+{ "studentNo" : "7", "FirstName" : "Nam" }
+{ "studentNo" : "8", "FirstName" : "Hey" }
+{ "studentNo" : "5", "FirstName" : "Hell" }
+{ "studentNo" : "6", "FirstName" : "Hi" }
+{ "studentNo" : "7", "FirstName" : "Nam" }
+
+> db.students.find({},{studentNo:1,FirstName: 1, _id: 0}).skip(2).limit(3)
+{ "studentNo" : "6", "FirstName" : "Hi" }
+{ "studentNo" : "7", "FirstName" : "Nam" }
+{ "studentNo" : "8", "FirstName" : "Hey" }
+
+> db.students.find({},{studentNo:1,FirstName: 1, _id: 0}).sort({FirstName:1})
+{ "studentNo" : "5", "FirstName" : "Hell" }
+{ "studentNo" : "5", "FirstName" : "Hell" }
+{ "studentNo" : "8", "FirstName" : "Hey" }
+{ "studentNo" : "6", "FirstName" : "Hi" }
+{ "studentNo" : "6", "FirstName" : "Hi" }
+{ "studentNo" : "1", "FirstName" : "Mark" }
+{ "studentNo" : "7", "FirstName" : "Nam" }
+{ "studentNo" : "7", "FirstName" : "Nam" }
+
+> db.students.find({},{studentNo:1,FirstName: 1, _id: 0}).sort({FirstName:-1})
+{ "studentNo" : "7", "FirstName" : "Nam" }
+{ "studentNo" : "7", "FirstName" : "Nam" }
+{ "studentNo" : "1", "FirstName" : "Mark" }
+{ "studentNo" : "6", "FirstName" : "Hi" }
+{ "studentNo" : "6", "FirstName" : "Hi" }
+{ "studentNo" : "8", "FirstName" : "Hey" }
+{ "studentNo" : "5", "FirstName" : "Hell" }
+{ "studentNo" : "5", "FirstName" : "Hell" }
+
+10. MongDb Indexing
+
+use temp
+for (i = 0; i<10000000; ++i){
+	db.posts.insert({"student_id": i, "Name": "Mark"})
+}
+# Created Index
+> db.posts.ensureIndex({"student_id": 1})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+
+> db.posts.find({"student_id": 1000})
+{ "_id" : ObjectId("5fa15cd8322e60571af7f39a"), "student_id" : 1000, "Name" : "Mark" }
+
+> db.posts.dropIndex({"student_id": 1})
+{ "nIndexesWas" : 3, "ok" : 1 }
+
+11. MongDb Aggregation
+
+> db.students.aggregate([{$group:{_id:"$Age",MyResult: {$sum:1}}}])
+{ "_id" : "10", "MyResult" : 3 }
+{ "_id" : "40", "MyResult" : 1 }
+{ "_id" : "12", "MyResult" : 1 }
+{ "_id" : "4", "MyResult" : 1 }
+{ "_id" : "17", "MyResult" : 2 }
+> db.students.aggregate([{$group:{_id:"$Gender",MaxAge: {$max:"$Age"}}}])
+> db.students.aggregate([{$group:{_id:"$Gender",MinAge: {$min:"$Age"}}}])
+
+12. MongoDB BackUp and Restore
+
+Taking BackUp
+a. Open Cmd as a admin
+b. cd C:\Program Files\MongoDB\Server\4.4\bin
+c. type mongo( to go into mongoshell)
+d. type mongodump--->it will create back up all data base , create a folde dumps and inside it contains all backup database)
+e. type  mongorestore --->will restore all database
+f. mongodump --db yourDatabaseName (to take back up of particular data base)
+g. mongorestore --db yourDatabaseName dump/yourDatabaseName (to restore your particular database and path of database like here dump folder)
+h. mongodump --db yourDatabaseName --collection yourCollectionName (to take back up of particular collection)
+i. mongorestore --db yourDatabaseName --collection yourCollectionName dump/yourDatabaseName/ConditionsName.bson (to restore particular collection)
